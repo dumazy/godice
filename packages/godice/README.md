@@ -1,5 +1,7 @@
 # godice
 
+[![pub package](https://img.shields.io/pub/v/godice.svg)](https://pub.dev/packages/godice) [![pub points](https://img.shields.io/pub/points/godice)](https://pub.dev/packages/godice/score) [![CI](https://github.com/dumazy/godice/actions/workflows/ci.yml/badge.svg)](https://github.com/dumazy/godice/actions/workflows/ci.yml)
+
 Pure Dart library for [GoDice](https://particula-tech.com/godice) smart dice.
 It implements the GoDice BLE protocol and leaves the Bluetooth stack up to you
 through a small `GoDiceTransport` interface, so it works with any BLE package

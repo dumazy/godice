@@ -1,4 +1,6 @@
-# go_dice
+# godice
+
+[![CI](https://github.com/dumazy/godice/actions/workflows/ci.yml/badge.svg)](https://github.com/dumazy/godice/actions/workflows/ci.yml) [![godice](https://img.shields.io/pub/v/godice.svg?label=godice)](https://pub.dev/packages/godice) [![godice_universal_ble](https://img.shields.io/pub/v/godice_universal_ble.svg?label=godice_universal_ble)](https://pub.dev/packages/godice_universal_ble)
 
 Dart support for [GoDice](https://particula-tech.com/godice) Bluetooth smart
 dice. This repository is a [pub workspace](https://dart.dev/tools/pub/workspaces)

@@ -1,5 +1,7 @@
 # godice_universal_ble
 
+[![pub package](https://img.shields.io/pub/v/godice_universal_ble.svg)](https://pub.dev/packages/godice_universal_ble) [![pub points](https://img.shields.io/pub/points/godice_universal_ble)](https://pub.dev/packages/godice_universal_ble/score) [![CI](https://github.com/dumazy/godice/actions/workflows/ci.yml/badge.svg)](https://github.com/dumazy/godice/actions/workflows/ci.yml)
+
 `GoDiceTransport` and scanner for [`godice`](https://pub.dev/packages/godice)
 built on [`universal_ble`](https://pub.dev/packages/universal_ble). Works on
 Android, iOS, macOS, Windows, Linux and Web.

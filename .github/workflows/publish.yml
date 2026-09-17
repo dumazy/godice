@@ -58,9 +58,22 @@ jobs:
             exit 1
           fi
 
+      # Baseline tags for versions that were published by hand must not fail
+      # the workflow, so skip when pub.dev already serves this version.
+      - name: Skip if already on pub.dev
+        id: existing
+        run: |
+          if curl -fsS "https://pub.dev/api/packages/${{ steps.pkg.outputs.name }}" \
+             | jq -e --arg v "${{ steps.pkg.outputs.version }}" '.versions[] | select(.version == $v)' >/dev/null; then
+            echo "${{ steps.pkg.outputs.name }} ${{ steps.pkg.outputs.version }} is already published; nothing to do."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Resolve workspace
+        if: steps.existing.outputs.skip != 'true'
         run: flutter pub get
 
       - name: Publish ${{ steps.pkg.outputs.name }} ${{ steps.pkg.outputs.version }}
+        if: steps.existing.outputs.skip != 'true'
         working-directory: ${{ steps.pkg.outputs.dir }}
         run: flutter pub publish --force

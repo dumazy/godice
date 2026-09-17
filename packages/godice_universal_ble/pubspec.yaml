@@ -5,6 +5,13 @@ description: >-
   Windows, Linux and Web.
 version: 0.1.0
 repository: https://github.com/dumazy/godice
+issue_tracker: https://github.com/dumazy/godice/issues
+topics:
+  - godice
+  - dice
+  - bluetooth
+  - ble
+  - flutter
 resolution: workspace
 
 environment:

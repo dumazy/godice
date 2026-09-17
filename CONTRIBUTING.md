@@ -56,14 +56,18 @@ Use [Conventional Commits](https://www.conventionalcommits.org) so
 4. The **Publish** workflow runs once per tag and publishes that package with
    `flutter pub publish --force`, authenticated through GitHub's OIDC token.
 
-### One-time pub.dev setup
+### pub.dev setup (done for the current packages)
 
-For each publishable package, on its pub.dev admin page enable
-*Automated publishing from GitHub Actions* with the repository
-`dumazy/godice` and the tag pattern `<package>-v{{version}}`. The first
-version of a new package has to be published by hand
-(`flutter pub publish` from the package directory); automated publishing can
-be enabled right after.
+Both packages are owned by the verified publisher `skystoneapps.com`.
+Automated publishing from GitHub Actions is enabled on each package's admin
+page with repository `dumazy/godice`, tag pattern `<package>-v{{version}}`,
+push events only (no `workflow_dispatch`, no required environment).
+
+For a *new* package: publish the first version by hand from its directory,
+transfer it to the publisher from its admin page, enable automated
+publishing as above, add its tag pattern to `.github/workflows/publish.yml`,
+and tag the published version (`git tag <package>-v<version>`) so
+`melos version` has a baseline.
 
 ### Publishing order
 
