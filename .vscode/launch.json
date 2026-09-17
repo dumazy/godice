@@ -7,7 +7,7 @@
       "name": "Flutter example (macOS)",
       "type": "dart",
       "request": "launch",
-      "program": "packages/godice_universal_ble/example/lib/main.dart",
+      "program": "${workspaceFolder}/packages/godice_universal_ble/example/lib/main.dart",
       "cwd": "${workspaceFolder}/packages/godice_universal_ble/example",
       "deviceId": "macos"
     },
@@ -15,14 +15,14 @@
       "name": "Flutter example (choose device)",
       "type": "dart",
       "request": "launch",
-      "program": "packages/godice_universal_ble/example/lib/main.dart",
+      "program": "${workspaceFolder}/packages/godice_universal_ble/example/lib/main.dart",
       "cwd": "${workspaceFolder}/packages/godice_universal_ble/example"
     },
     {
       "name": "godice_cli: list nearby dice",
       "type": "dart",
       "request": "launch",
-      "program": "tools/godice_cli/bin/godice_cli.dart",
+      "program": "${workspaceFolder}/tools/godice_cli/bin/godice_cli.dart",
       "cwd": "${workspaceFolder}/tools/godice_cli",
       "args": ["--list"],
       "console": "terminal"
@@ -31,7 +31,7 @@
       "name": "godice_cli: connect to first die",
       "type": "dart",
       "request": "launch",
-      "program": "tools/godice_cli/bin/godice_cli.dart",
+      "program": "${workspaceFolder}/tools/godice_cli/bin/godice_cli.dart",
       "cwd": "${workspaceFolder}/tools/godice_cli",
       "args": ["--type", "d6"],
       // Terminal console so the single-key shortcuts (1-7, b, c, l, p, q) work.
@@ -41,7 +41,7 @@
       "name": "godice: replay example (no hardware)",
       "type": "dart",
       "request": "launch",
-      "program": "packages/godice/example/godice_example.dart",
+      "program": "${workspaceFolder}/packages/godice/example/godice_example.dart",
       "cwd": "${workspaceFolder}/packages/godice"
     }
   ]
