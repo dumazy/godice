@@ -1,0 +1,66 @@
+# Publishes one package to pub.dev when its release tag is pushed.
+#
+# Tags are created by `melos version` and look like `godice-v0.2.0` or
+# `godice_universal_ble-v0.2.0`. Each package must have GitHub Actions
+# automated publishing enabled on pub.dev (Admin > Automated publishing) with:
+#   repository: dumazy/godice
+#   tag pattern: <package>-v{{version}}
+# No secrets are needed: pub.dev trusts the GitHub OIDC token.
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'godice-v[0-9]+.[0-9]+.[0-9]+*'
+      - 'godice_universal_ble-v[0-9]+.[0-9]+.[0-9]+*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      id-token: write # required for pub.dev OIDC authentication
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve package from tag
+        id: pkg
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          name="${tag%-v*}"
+          version="${tag##*-v}"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "dir=packages/$name" >> "$GITHUB_OUTPUT"
+
+      - name: Read Flutter version from .fvmrc
+        id: fvm
+        run: echo "version=$(jq -r .flutter .fvmrc)" >> "$GITHUB_OUTPUT"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ steps.fvm.outputs.version }}
+          channel: stable
+          cache: true
+
+      # Mints the short-lived pub.dev token from the GitHub OIDC token. The
+      # token lands in the shared pub token store, so Flutter's bundled `dart`
+      # picks it up too.
+      - uses: dart-lang/setup-dart@v1
+
+      - name: Check tag matches pubspec version
+        working-directory: ${{ steps.pkg.outputs.dir }}
+        run: |
+          actual="$(grep -E '^version:' pubspec.yaml | awk '{print $2}')"
+          if [ "$actual" != "${{ steps.pkg.outputs.version }}" ]; then
+            echo "Tag version ${{ steps.pkg.outputs.version }} != pubspec version $actual" >&2
+            exit 1
+          fi
+
+      - name: Resolve workspace
+        run: flutter pub get
+
+      - name: Publish ${{ steps.pkg.outputs.name }} ${{ steps.pkg.outputs.version }}
+        working-directory: ${{ steps.pkg.outputs.dir }}
+        run: flutter pub publish --force

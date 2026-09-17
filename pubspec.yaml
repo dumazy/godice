@@ -1,0 +1,78 @@
+name: go_dice_workspace
+description: Pub workspace for the GoDice Dart packages, smoke tests and vendored dependencies.
+publish_to: none
+repository: https://github.com/dumazy/godice
+
+environment:
+  sdk: ^3.13.0
+
+# Pub workspace members. Publishable packages live under packages/, private
+# tooling under tools/, vendored third-party code under third_party/.
+workspace:
+  - packages/godice
+  - packages/godice_universal_ble
+  - packages/godice_universal_ble/example
+  - tools/godice_bluetooth_dart
+  - tools/godice_cli
+  - third_party/bluetooth_dart
+
+dev_dependencies:
+  lints: ^6.0.0
+  melos: ^8.7.0
+
+melos:
+  # The vendored copy is managed by hand (see third_party/bluetooth_dart/PATCHES.md).
+  ignore:
+    - bluetooth_dart
+
+  ide:
+    intellij:
+      enabled: false
+
+  command:
+    version:
+      # Tags look like `godice-v0.1.0`; the publish workflow triggers on them.
+      branch: main
+      linkToCommits: true
+      workspaceChangelog: true
+      # Keep dependents in sync when a package they depend on is released.
+      updateGitTagRefs: true
+
+  scripts:
+    analyze:
+      description: Analyze every package in the workspace.
+      run: dart analyze --fatal-infos .
+
+    format:
+      description: Check formatting of the packages we own.
+      exec: dart format --set-exit-if-changed .
+
+    test:
+      description: Run all unit tests.
+      run: melos run test:dart && melos run test:flutter
+
+    test:dart:
+      description: Run pure Dart tests.
+      exec: dart test
+      packageFilters:
+        flutter: false
+        dirExists: test
+
+    test:flutter:
+      description: Run Flutter tests.
+      exec: flutter test
+      packageFilters:
+        flutter: true
+        dirExists: test
+
+    publish:dry-run:
+      description: Validate the publishable packages against pub.dev rules.
+      run: melos publish --dry-run --yes
+
+    smoke-test:
+      description: Pure Dart hardware smoke test (needs a GoDice nearby and tool/build_native.sh).
+      exec:
+        command: dart run godice_cli --list
+        concurrency: 1
+      packageFilters:
+        scope: godice_cli

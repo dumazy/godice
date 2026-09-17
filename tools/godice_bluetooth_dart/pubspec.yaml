@@ -1,0 +1,22 @@
+name: godice_bluetooth_dart
+description: >-
+  GoDice transport and scanner built on bluetooth_dart, a pure Dart BLE stack
+  (btleplug over FFI) that runs in CLI tools and Flutter apps alike.
+version: 0.1.0
+repository: https://github.com/dumazy/godice
+# Not published: it depends on a locally patched bluetooth_dart (see
+# third_party/bluetooth_dart/PATCHES.md). Used by tools/godice_cli as a
+# pure-Dart hardware smoke test. Flutter apps should use godice_universal_ble.
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  bluetooth_dart: ^0.0.1
+  godice: ^0.1.0
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.26.0
