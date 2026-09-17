@@ -67,7 +67,11 @@ melos:
 
     publish:dry-run:
       description: Validate the publishable packages against pub.dev rules.
-      run: melos publish --dry-run --yes
+      # `melos publish --dry-run` skips packages whose version is already on
+      # pub.dev, so run pub's own validation in every public package instead.
+      exec: dart pub publish --dry-run
+      packageFilters:
+        private: false
 
     smoke-test:
       description: Pure Dart hardware smoke test (needs a GoDice nearby and tool/build_native.sh).
