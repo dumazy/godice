@@ -12,7 +12,9 @@ pubspec_overrides.yaml
 # IDEs
 .idea/
 *.iml
-.vscode/
+.vscode/*
+!.vscode/launch.json
+!.vscode/settings.json
 
 # Flutter (example app)
 **/.flutter-plugins

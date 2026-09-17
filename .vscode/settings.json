@@ -1,0 +1,8 @@
+{
+  // Use the FVM-pinned Flutter SDK (see .fvmrc).
+  "dart.flutterSdkPath": ".fvm/flutter_sdk",
+  "search.exclude": {
+    "**/.fvm": true,
+    "**/native": true
+  }
+}
