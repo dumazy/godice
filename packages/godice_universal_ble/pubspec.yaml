@@ -1,0 +1,23 @@
+name: godice_universal_ble
+description: >-
+  GoDice transport and scanner for Flutter built on universal_ble. Pair it
+  with package:godice to connect to GoDice smart dice on Android, iOS, macOS,
+  Windows, Linux and Web.
+version: 0.1.0
+repository: https://github.com/dumazy/godice
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+  flutter: ">=3.47.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  godice: ^0.1.0
+  universal_ble: ^2.3.0
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter

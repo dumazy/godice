@@ -1,0 +1,35 @@
+# FVM
+.fvm/
+
+# Dart / pub
+.dart_tool/
+build/
+pubspec_overrides.yaml
+# Workspace lock lives at the root only.
+**/pubspec.lock
+!/pubspec.lock
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Flutter (example app)
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/ios/Flutter/ephemeral/
+**/macos/Flutter/ephemeral/
+**/ios/Pods/
+**/macos/Pods/
+**/ios/.symlinks/
+**/android/.gradle/
+**/android/local.properties
+**/*.xcworkspace/xcuserdata/
+**/*.xcodeproj/xcuserdata/
+**/*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Native BLE library for the smoke test (fetched + built by tool/build_native.sh)
+native/
+
+# macOS
+.DS_Store

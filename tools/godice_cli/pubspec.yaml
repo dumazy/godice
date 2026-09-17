@@ -1,0 +1,18 @@
+name: godice_cli
+description: Terminal example that scans for a GoDice, connects and prints rolls.
+version: 0.1.0
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  godice: ^0.1.0
+  godice_bluetooth_dart: ^0.1.0
+
+dev_dependencies:
+  lints: ^6.0.0
+
+executables:
+  godice_cli:
