@@ -19,7 +19,11 @@ Day-to-day commands (all run from the repository root):
 | `melos run smoke-test` | lists nearby dice with the pure Dart CLI (needs hardware + `tool/build_native.sh`) |
 | `melos list` | shows every package and whether it is private |
 
-CI runs the first four on every push and pull request.
+CI runs the first four on every push and pull request, plus
+`tool/check_min_sdk.sh` on the oldest Flutter the packages claim to support
+(the `flutter: ">=..."` floor in their pubspecs). Run that locally with
+`fvm spawn 3.32.0 bash tool/check_min_sdk.sh` before lowering or raising the
+floor.
 
 ## Repository layout
 
