@@ -29,7 +29,7 @@ pubspec_overrides.yaml
 **/*.xcodeproj/project.xcworkspace/xcuserdata/
 
 # Native BLE library for the smoke test (fetched + built by tool/build_native.sh)
-native/
+/native/
 
 # macOS
 .DS_Store
