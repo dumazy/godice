@@ -18,7 +18,7 @@ workspace:
 
 dev_dependencies:
   lints: ^6.0.0
-  melos: ^8.7.0
+  melos: ^8.10.0
 
 melos:
   # The vendored copy is managed by hand (see third_party/bluetooth_dart/PATCHES.md).
